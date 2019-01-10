@@ -1,4 +1,3 @@
-
 <?php
 
 namespace AppBundle\Controller;
@@ -143,24 +142,6 @@ class GroupController extends Controller
         
     }
 
-
-
-    /**
-     * @Route("/groups/{id}/", name="group_users")
-     */
-    public function showUsersAction($id, Request $request)
-    {
-        $users = $this->getDoctrine()->getRepository('AppBundle:Users')->findBy(
-            ['userGroup' => $id]
-        );
-        // $group = $this->getDoctrine()->getRepository('AppBundle:Groups')->find($id);
-
-        // Render Template
-        return $this->render('group/users.html.twig', array(
-            'users' => $users,
-        ));
-    }
-}
 
 
     /**
