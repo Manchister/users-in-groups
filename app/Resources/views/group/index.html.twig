@@ -2,17 +2,21 @@
 
 {% block body %}
 	<div class="card">
-      <h5 class="card-header">Group List</h5>
-      <div class="card-body">
-      	
-      	{% for flashMessage in app.session.flashbag.get('notice') %}
-      	<div class="alert alert-success">{{ flashMessage }}</div>
-      	{% endfor %}
-      	{% for flashMessage in app.session.flashbag.get('error') %}
-      	<div class="alert alert-danger">{{ flashMessage }}</div>
-      	{% endfor %}
+		<h5 class="card-header">
+			Group List &nbsp;&nbsp;&nbsp;
+			<a class="btn btn-sm btn-success" href="/groups/create">Create New</a>
+		</h5>
+		
+		<div class="card-body">
+			
+			{% for flashMessage in app.session.flashbag.get('notice') %}
+			<div class="alert alert-success">{{ flashMessage }}</div>
+			{% endfor %}
+			{% for flashMessage in app.session.flashbag.get('error') %}
+			<div class="alert alert-danger">{{ flashMessage }}</div>
+			{% endfor %}
 
-        <table class="table table-dark">
+		<table class="table table-dark">
 		  <thead>
 		    <tr>
 		      <th scope="col">#</th>
@@ -21,8 +25,8 @@
 		    </tr>
 		  </thead>
 		  <tbody>
-	      	{% for group in groups %}
-	      		<tr>
+		  	{% for group in groups %}
+		  		<tr>
 			      <th scope="row">{{ group.id }}</th>
 			      <td>{{ group.name }}</td>
 			      <td>
@@ -31,7 +35,7 @@
 			      	<a href="/groups/delete/{{ group.id }}" class="btn btn-danger">Delete</a>
 			      </td>
 			    </tr>
-	      	{% endfor %}
+		  	{% endfor %}
 		  </tbody>
 		</table>
 
