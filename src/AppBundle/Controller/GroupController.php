@@ -1,46 +1,4 @@
-<?php
 
-namespace AppBundle\Controller;
-
-use AppBundle\Entity\Groups;
-use AppBundle\Entity\Users;
-
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-
-class GroupController extends Controller
-{
-    /**
-     * @Route("/groups", name="groups_list")
-     */
-    public function indexAction(Request $request)
-    {
-        $groups = $this->getDoctrine()->getRepository('AppBundle:Groups')->findAll();
-
-        // Render Template
-        return $this->render('group/index.html.twig', array(
-            'groups' => $groups,
-        ));
-    }
-
-    /**
-     * @Route("/groups/create", name="group_create")
-     */
-    public function createAction(Request $request)
-    {
-        $group = new Groups;
-
-        $form = $this->createFormBuilder($group)
-        ->add('name', TextType::class, array('attr' => array('class' => 'form-control', 'style' => 'margin-bottom:15px;')))
-        ->add('save', SubmitType::class, array('label' => 'Create Group', 'attr' => array('class' => 'btn btn-success')))
-        ->getForm();
-
-        // Handle Request
 <?php
 
 namespace AppBundle\Controller;
@@ -203,30 +161,6 @@ class GroupController extends Controller
         ));
     }
 }
-
-    }
-
-
-
-    /**
-     * @Route("/groups/delete/{id}", name="group_delete")
-     */
-    public function deleteAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $group = $em->getRepository('AppBundle:Users')->find($id);
-
-        if (!$group) {
-            throw $this->createNotFoundException('No group found for id ' . $id);
-        }
-
-        $em->remove($group);
-        $em->flush();
-        $this->addFlash('notice', 'Group Deleted');
-
-        return $this->redirectToRoute('groups_list');
-    }
-
 
 
     /**
